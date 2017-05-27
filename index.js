@@ -17,13 +17,10 @@ module.exports = ({ publish }) => {
     await publish('/jkbx/status', status);
   });
 
+  player.observeProperty('metadata', 42);
+
   return ({ payload }) => {
-    if (payload.file === undefined) {
-      log(`Seeking...`);
-      player.seek(payload.seek || 5);
-      return;
-    }
-    log(`Message received // Playing...${payload.file}`);
+    log(`Playing...${payload.file}`);
     player.loadFile(payload.file);
   };
 };
