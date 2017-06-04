@@ -14,13 +14,19 @@ module.exports = ({ publish }) => {
   });
 
   player.on('statuschange', async status => {
-    await publish('/jkbx/status', status);
+    log(`outgoing message: ${JSON.stringify(status)}`);
+    await publish('/jukebox/status', status);
   });
 
   player.observeProperty('metadata', 42);
 
   return ({ payload }) => {
-    log(`Playing...${payload.file}`);
-    player.loadFile(payload.file);
+    log(`incoming message: ${JSON.stringify(payload)}`);
+    const { command, args } = payload;
+    if (!command) {
+      log(`The '${command}' command is falsy...ignore it!`);
+      return;
+    }
+    player.command(command, args);
   };
 };
