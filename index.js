@@ -1,10 +1,10 @@
 const mpv = require('node-mpv');
-const log = require('debug')('jkbx');
+const log = require('debug')('jukebox');
 
 module.exports = ({ publish }) => {
   const player = new mpv({
     audio_only: true,
-    socket: 'jkbx.sock',
+    socket: 'jukebox.sock',
     time_update: 1,
     verbose: false
   });
