@@ -2,12 +2,15 @@ const mpv = require('node-mpv');
 const log = require('debug')('jukebox');
 
 module.exports = ({ publish }) => {
-  const player = new mpv({
-    audio_only: true,
-    socket: 'jukebox.sock',
-    time_update: 1,
-    verbose: false
-  });
+  const player = new mpv(
+    {
+      audio_only: true,
+      socket: '/tmp/jukebox.sock',
+      time_update: 1,
+      verbose: false
+    },
+    ['--no-ytdl', '--cache-file=TMP']
+  );
 
   player.on('stopped', () => {
     log(`Stopped`);
