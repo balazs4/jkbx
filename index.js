@@ -22,6 +22,7 @@ module.exports = ({ publish }) => {
   });
 
   player.observeProperty('metadata', 42);
+  player.unobserveProperty(3);
 
   return ({ payload }) => {
     log(`incoming message: ${JSON.stringify(payload)}`);
