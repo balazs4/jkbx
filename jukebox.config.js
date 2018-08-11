@@ -7,6 +7,7 @@ module.exports = {
       args: ['run', 'start'],
       env: {
         BROKER: 'mqtt://localhost:1883'
+        ,DEBUG:'*'
       }
     },
     {
